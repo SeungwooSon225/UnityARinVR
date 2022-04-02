@@ -40,30 +40,22 @@ public class ScreenCapture : MonoBehaviour
         }
 
 
-        if (communication.data.Length > 3 && communication.isFirst)
-        {
-            communication.isFirst = false;
-            string[] datas = communication.data.Split(' ');
-            Debug.Log(datas);
-            float depth = float.Parse(datas[2]);
-            float z = 220.67126f * depth - 9.96772f;
+        //if (communication.data.Length > 3 && communication.isFirst)
+        //{
+        //    communication.isFirst = false;
+        //    string[] datas = communication.data.Split(' ');
+        //    Debug.Log(datas);
+        //    float depth = float.Parse(datas[2]);
+        //    float z = 220.67126f * depth - 9.96772f;
 
-            float x = float.Parse(datas[0]);
-            float y = float.Parse(datas[1]);
-
-
-            Vector3 tempPos = camera.ViewportToWorldPoint(new Vector3(x / 1920f, (1080f - y) / 1080f, z + 10f));
-            //Vector3 tempPos1 = camera.ViewportToWorldPoint(new Vector3(0f, 1f, 5f));
-            //Vector3 tempPos2 = camera.ViewportToWorldPoint(new Vector3(0f, 0f, 5f));
-            //Vector3 tempPos3 = camera.ViewportToWorldPoint(new Vector3(1f, 0f, 5f));
+        //    float x = float.Parse(datas[0]);
+        //    float y = float.Parse(datas[1]);
 
 
-            //float x = tempPos2.x + (tempPos3.x - tempPos2.x) * 986.0f / 1920f;
-            //float y = tempPos2.y + (tempPos1.y - tempPos2.y) * (1080f - 552.75f) / 1080f;
+        //    Vector3 tempPos = camera.ViewportToWorldPoint(new Vector3(x / 1920f, (1080f - y) / 1080f, 100f));
 
-
-            target.transform.position = new Vector3(tempPos.x, tempPos.y, tempPos.z);
-        }
+        //    target.transform.position = new Vector3(tempPos.x, tempPos.y, tempPos.z);
+        //}
     }
 
     IEnumerator ScreenShot()

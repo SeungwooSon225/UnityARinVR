@@ -66,8 +66,8 @@ def findArucoMarkers(img, mtx, dist, markerSize=6, totalMarkers=250, draw=True):
             rvec, tvec, markerPoints = aruco.estimatePoseSingleMarkers(bboxs[i], 0.02, mtx, dist)
             (rvec - tvec).any()  # get rid of that nasty numpy value array error
 
-            # aruco.drawDetectedMarkers(img, bboxs)  # Draw A square around the markers
-            # aruco.drawAxis(img, mtx, dist, rvec, tvec, 0.01)  # Draw Axis
+            aruco.drawDetectedMarkers(img, bboxs)  # Draw A square around the markers
+            aruco.drawAxis(img, mtx, dist, rvec, tvec, 0.01)  # Draw Axis
 
             return rvec, tvec, bboxs
 
@@ -86,13 +86,17 @@ while True:
     print(receivedData)
     img = cv2.imread("./img.png")
 
+    img = cv2.flip(img, 1)
+
     rvec, tvec, bbox = findArucoMarkers(img, mtx, dist)
 
-    # cv2.imshow("Image", img)
-    # key = cv2.waitKey(1)
+    cv2.imshow("Image", img)
+    key = cv2.waitKey(1)
+    data = " "
     print()
     if rvec is not None:
-        data = str(sum(bbox[0][0].T[0])/4) + " " + str(sum(bbox[0][0].T[1])/4) + " " + str(tvec[0][0][2])
+        data = str(1920-sum(bbox[0][0].T[0])/4) + " " + str(1080 - sum(bbox[0][0].T[1])/4)
+        print(data)
     sock.sendall(data.encode("UTF-8")) #Converting string to Byte, and sending it to C#
 
 

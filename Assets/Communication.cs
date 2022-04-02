@@ -77,8 +77,8 @@ public class Communication : MonoBehaviour
             if (isFirst == true)
             {
                 data = dataReceived;
-            }
-            Debug.Log(dataReceived);
+                Debug.Log(dataReceived);
+            } 
         }
     }
 }
